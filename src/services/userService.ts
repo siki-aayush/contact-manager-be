@@ -102,7 +102,6 @@ export const updateUser = async (user: User): Promise<Succes<User>> => {
 export const deleteUser = async (id: number) => {
   logger.info("Deleting user!!");
   await UserModel.deleteUser(id);
-  logger.info("user deleted successfully");
 
   return {
     message: "Successfully deleted user",
@@ -122,14 +121,17 @@ export const loginUser = async (
   logger.info("Logging in user!!");
   const user = await UserModel.getUserByEmail(email);
 
+  // If no user is found then the user not found message is returned
   if (!user) {
     return {
       message: "User not found",
     };
   }
 
+  // Checks whether the password matches or not
   const isCorrect = bcrypt.compareSync(password, user.password);
 
+  // If the password matches then a new JWT token is created and send as response
   if (isCorrect) {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
 
@@ -139,6 +141,7 @@ export const loginUser = async (
     };
   }
 
+  // If password does not match then wrong password response is returned
   return {
     message: "Wrong password",
   };
