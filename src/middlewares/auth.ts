@@ -24,7 +24,7 @@ const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
       }
     );
   } else {
-    next(new CustomError("Invalid token", StatusCodes.UNAUTHORIZED));
+    next(new CustomError("Invalid token", StatusCodes.FORBIDDEN));
   }
 };
 
