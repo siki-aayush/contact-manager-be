@@ -6,6 +6,8 @@ export interface Contact {
   address: string;
   photograph: string;
   cloud_public_id: string;
+  user_id: string;
+  is_favourite: boolean;
 }
 
 export type ContactToCreate = Omit<Contact, "id">;

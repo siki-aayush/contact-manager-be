@@ -64,7 +64,7 @@ export const createContact = (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, phone, email, address } = req.body;
+  const { name, phone, email, address, user_id, is_favourite } = req.body;
   const fileString = req.file?.path as string;
 
   contactService
@@ -74,6 +74,8 @@ export const createContact = (
         phone,
         email,
         address,
+        user_id,
+        is_favourite,
       },
       fileString
     )
@@ -92,7 +94,16 @@ export const updateContact = (
   res: Response,
   next: NextFunction
 ) => {
-  const { id, name, phone, email, address, cloud_public_id } = req.body;
+  const {
+    id,
+    name,
+    phone,
+    email,
+    address,
+    cloud_public_id,
+    user_id,
+    is_favourite,
+  } = req.body;
   const fileString = req.file?.path as string;
   contactService
     .updateContact(
@@ -102,6 +113,8 @@ export const updateContact = (
         phone,
         email,
         address,
+        user_id,
+        is_favourite,
         cloud_public_id: cloud_public_id as string,
       },
       fileString

@@ -64,6 +64,9 @@ export const createContact = async (
       resource_type: "image",
       upload_preset: "contact-manager",
       use_filename: true,
+      width: 500,
+      height: 500,
+      crop: "limit",
     });
 
     // Delets the file from the server

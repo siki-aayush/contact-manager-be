@@ -9,6 +9,13 @@ export async function up(knex: Knex): Promise<void> {
     table.string("email");
     table.string("address");
     table.string("cloud_public_id");
+    table.boolean("is_favourite").defaultTo(false);
+    table
+      .integer("user_id")
+      .notNullable()
+      .references("id")
+      .inTable("user_account")
+      .onDelete("CASCADE");
   });
 }
 
