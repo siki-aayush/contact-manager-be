@@ -22,7 +22,7 @@ export const generateToken = async (
     );
 
     return {
-      data: { accessToken, refreshToken: newRefreshToken },
+      data: { accessToken, user, refreshToken: newRefreshToken },
       message: "Successfully retrieved new tokens",
     };
   } catch (error) {

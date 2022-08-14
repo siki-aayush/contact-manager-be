@@ -142,7 +142,7 @@ export const loginUser = async (
     );
 
     return {
-      data: { accessToken, refreshToken },
+      data: { accessToken, refreshToken, user },
       message: "Logged in successfully",
     };
   }

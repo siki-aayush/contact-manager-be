@@ -74,8 +74,8 @@ export const createContact = (
         phone,
         email,
         address,
-        user_id,
-        is_favourite,
+        user_id: +user_id,
+        is_favourite: is_favourite === "true" ? true : false,
       },
       fileString
     )

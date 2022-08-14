@@ -6,7 +6,7 @@ export interface Contact {
   address: string;
   photograph: string;
   cloud_public_id: string;
-  user_id: string;
+  user_id: number;
   is_favourite: boolean;
 }
 
