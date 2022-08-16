@@ -12,9 +12,9 @@ export const generateToken = async (
   const user = await UserModel.getUserById(id);
 
   try {
-    jwt.verify(refreshToken, process.env.JWT_SECRET as string);
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string);
     const accessToken = jwt.sign(user, process.env.JWT_SECRET as string, {
-      expiresIn: "10m",
+      expiresIn: "1m",
     });
     const newRefreshToken = jwt.sign(
       user,

@@ -134,7 +134,7 @@ export const loginUser = async (
   // If the password matches then a new JWT token is created and send as response
   if (isCorrect) {
     const accessToken = jwt.sign(user, process.env.JWT_SECRET as string, {
-      expiresIn: "10m",
+      expiresIn: "1m",
     });
     const refreshToken = jwt.sign(
       user,

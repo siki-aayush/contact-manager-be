@@ -18,3 +18,5 @@ export type ContactBeforeUpload = Omit<
   Contact,
   "id" | "photograph" | "cloud_public_id"
 >;
+
+export type ContactToGet = Omit<Contact, "user_id" | "cloud_public_id">;

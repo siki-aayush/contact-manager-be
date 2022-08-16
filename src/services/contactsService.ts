@@ -1,6 +1,7 @@
 import {
   Contact,
   ContactBeforeUpload,
+  ContactToGet,
   ContactToUpdate,
 } from "../domain/Contact";
 import Succes from "../domain/Success";
@@ -9,11 +10,14 @@ import ContactsModel from "../models/ContactsModel";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-export const getAllContacts = async (): Promise<Succes<Contact>> => {
+export const getAllContacts = async (
+  id: number,
+  page: number
+): Promise<Succes<Contact>> => {
   logger.info("Getting all contacts!!");
 
   // Fetches all the contacts from the database
-  const allContacts = await ContactsModel.getAllContacts();
+  const allContacts = await ContactsModel.getAllContacts(id, page);
 
   return {
     data: allContacts,
@@ -21,7 +25,9 @@ export const getAllContacts = async (): Promise<Succes<Contact>> => {
   };
 };
 
-export const getContactById = async (id: number): Promise<Succes<Contact>> => {
+export const getContactById = async (
+  id: number
+): Promise<Succes<ContactToGet>> => {
   logger.info("Getting contact by id!!");
 
   // Fetches the contact matching the provided id
@@ -109,12 +115,15 @@ export const updateContact = async (
     }
 
     // uploads the image to cloudinary
+
     const result = await cloudinary.uploader.upload(filePath, {
       resource_type: "image",
       upload_preset: "contact-manager",
       use_filename: true,
       public_id: contact.cloud_public_id,
-      invalidate: true,
+      width: 500,
+      height: 500,
+      crop: "limit",
     });
 
     // Delets the file from the server
@@ -136,12 +145,29 @@ export const updateContact = async (
     logger.error(error);
 
     // Deletes the file from the server
-    fs.unlinkSync(filePath);
+    // fs.unlinkSync(filePath);
 
     return {
       message: "Could not update the contact!!",
     };
   }
+};
+
+export const updateContactFavourite = async (
+  id: number,
+  isFavrouite: boolean
+): Promise<Succes<Contact>> => {
+  logger.info("Updating contact favourite!!");
+
+  const updatedConatct = await ContactsModel.updateContactFavourite(
+    id,
+    isFavrouite
+  );
+
+  return {
+    data: updatedConatct,
+    message: "Successfully updated the contact",
+  };
 };
 
 export const deleteContact = async (id: number): Promise<Succes<Contact>> => {

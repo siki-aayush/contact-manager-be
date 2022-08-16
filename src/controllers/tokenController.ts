@@ -8,7 +8,7 @@ export const generateToken = (
 ) => {
   const { refreshToken, id } = req.body;
   tokenService
-    .generateToken(refreshToken, id)
+    .generateToken(refreshToken, +id)
     .then((data) => res.json(data))
     .catch((err) => next(err));
 };
