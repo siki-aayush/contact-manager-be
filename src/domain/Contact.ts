@@ -6,7 +6,7 @@ export interface Contact {
   address: string;
   photograph: string;
   cloud_public_id: string;
-  user_id: string;
+  user_id: number;
   is_favourite: boolean;
 }
 
@@ -18,3 +18,5 @@ export type ContactBeforeUpload = Omit<
   Contact,
   "id" | "photograph" | "cloud_public_id"
 >;
+
+export type ContactToGet = Omit<Contact, "user_id" | "cloud_public_id">;

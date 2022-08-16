@@ -1,3 +1,7 @@
+import { UserToGet } from "./User";
+
 export interface Token {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
+  user: UserToGet;
 }

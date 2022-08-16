@@ -1,4 +1,4 @@
-import { NextFunction, Request, response, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as contactService from "../services/contactsService";
 
 /**
@@ -12,8 +12,10 @@ export const getAllContact = (
   res: Response,
   next: NextFunction
 ) => {
+  const { page } = req.query;
+  const { id } = req.body;
   contactService
-    .getAllContacts()
+    .getAllContacts(+id, page ? +page : 1)
     .then((data) => res.json(data))
     .catch((err) => next(err));
 };
@@ -32,7 +34,7 @@ export const getContactById = (
   const { id } = req.params;
   contactService
     .getContactById(+id)
-    .then((data) => response.json(data))
+    .then((data) => res.json(data))
     .catch((err) => next(err));
 };
 
@@ -49,7 +51,7 @@ export const getContactByName = (
   const { name } = req.body;
   contactService
     .getContactByName(name)
-    .then((data) => response.json(data))
+    .then((data) => res.json(data))
     .catch((err) => next(err));
 };
 
@@ -74,8 +76,8 @@ export const createContact = (
         phone,
         email,
         address,
-        user_id,
-        is_favourite,
+        user_id: +user_id,
+        is_favourite: is_favourite === "true" ? true : false,
       },
       fileString
     )
@@ -119,6 +121,19 @@ export const updateContact = (
       },
       fileString
     )
+    .then((data) => res.json(data))
+    .catch((error) => next(error));
+};
+
+export const updateContactFavourite = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id, is_favourite } = req.body;
+
+  contactService
+    .updateContactFavourite(id, is_favourite)
     .then((data) => res.json(data))
     .catch((error) => next(error));
 };
