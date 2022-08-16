@@ -8,7 +8,7 @@ dotenv.config({
 
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: "postgres",
+    client: process.env.DB_CLIENT,
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
