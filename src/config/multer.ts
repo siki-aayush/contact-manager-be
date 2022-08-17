@@ -7,12 +7,12 @@ import fs from "fs";
  */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const path = process.env.UPLOAD_DIR as string;
+    const path = process.env.UPLOAD_PATH || "uploads";
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, { recursive: true });
     }
     if (file) {
-      cb(null, process.env.UPLOAD_PATH || "uploads");
+      cb(null, path);
     } else {
       cb(new Error("Multer error!!"), "");
     }
