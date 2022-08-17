@@ -27,6 +27,7 @@ const config: { [key: string]: Knex.Config } = {
     client: "pg",
     connection: {
       database: process.env.DB_NAME,
+      uri: process.env.DATABASE_URL,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       ssl: { rejectUnauthorized: false },
