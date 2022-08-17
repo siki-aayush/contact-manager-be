@@ -94,7 +94,7 @@ export const createContact = async (
     logger.error(error);
 
     // Deletes the file from the server
-    // fs.unlinkSync(filePath);
+    fs.unlinkSync(filePath);
 
     return {
       message: "Could not create the contact!!",

@@ -7,7 +7,7 @@ import multer from "multer";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file) {
-      cb(null, "src/assets/uploads");
+      cb(null, process.env.UPLOAD_PATH || "uploads");
     } else {
       cb(new Error("Multer error!!"), "");
     }
