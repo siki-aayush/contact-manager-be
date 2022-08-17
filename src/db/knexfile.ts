@@ -24,7 +24,7 @@ const config: { [key: string]: Knex.Config } = {
     },
   },
   production: {
-    client: "pg",
+    client: "postgres",
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
