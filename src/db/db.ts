@@ -1,7 +1,6 @@
 import Knex from "knex";
-import knexConfig from "./knexfile";
+import { config } from "./knexfile";
 
+const knex = Knex(config.development);
 
-const knex = Knex(knexConfig.development);
-
-export default knex
+export default knex;
