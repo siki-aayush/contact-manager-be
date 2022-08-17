@@ -6,9 +6,9 @@ dotenv.config({
   path: path.join(__dirname, "../../.env"),
 });
 
-const config: { [key: string]: Knex.Config } = {
+const config: { [kkjkey: string]: Knex.Config } = {
   development: {
-    client: process.env.DB_CLIENT,
+    client: "pg",
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
