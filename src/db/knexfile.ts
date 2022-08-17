@@ -6,7 +6,7 @@ dotenv.config({
   path: path.join(__dirname, "../../.env"),
 });
 
-export const config: { [key: string]: Knex.Config } = {
+const config: { [key: string]: Knex.Config } = {
   development: {
     client: "pg",
     connection: {
@@ -29,7 +29,7 @@ export const config: { [key: string]: Knex.Config } = {
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      // ssl: { rejectUnauthorized: false },
+      ssl: { rejectUnauthorized: false },
     },
     pool: {
       min: 2,
@@ -41,4 +41,4 @@ export const config: { [key: string]: Knex.Config } = {
   },
 };
 
-// export default config;
+export default config;
