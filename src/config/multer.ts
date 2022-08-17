@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs";
 
 /*
  * Creates a custom function to store the file with custom name
@@ -6,6 +7,10 @@ import multer from "multer";
  */
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    const path = process.env.UPLOAD_DIR as string;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, { recursive: true });
+    }
     if (file) {
       cb(null, process.env.UPLOAD_PATH || "uploads");
     } else {
